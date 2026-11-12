@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bluetooth Radar</title>
+  <meta name="description"
+    content="Find your bluetooth devices with a radar-style interface! Walk around and watch the blip move as you get closer to the device!">
+  <meta name="author" content="D474designs">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords"
+    content="bluetooth, radar, device finder, wireless, technology, innovation, d474, d474media, d474designs, d474th3d357r0y3r, games, video games, free games, online games, browser games, free game, game, miniclip, ugotgames, you got games, yougotgames, flash games, flash, d474, d474media, d474designs, data the destroyer, d474th3d357r0y3r, money, income, passive income, refferals, reffer, refferer, ads, links, work from home, steady income, start your own business, graphic design, seo, get paid, job, internet, advertisement, rich, dollars, work, daily, every day, get paid everyday, thathill, thathill.webs.com, https://thathill.webs.com, emoneyspace, emoneyspace.com/d474, emoneyspace.com, https://www.emoneyspace.com, grind, collect, collect money, collect money from home, influencer, how to make money as an influencer, how to create a passive income, part-time job, part time, part time job, how to start a business from home, how to start a business, d474, d474media, d474designs, data the destroyer, d474th3d357r0y3r, media company, online media, original content, representation, agent, online media company, advertisement, promotion, get noticed, ads, post ads, professional, professional advertisement service, professional advertisement firm, ad firm, advertisement firm, promotion firm, go viral, viral promotion, viral promotion firm, media firm, media agency, mass media, worldwide, global, world wide, world-wide advertisement, global advertisement, social media advertisement, social media promotion, social, influencer, how to make money as an influencer, how to gain a following, instagram, facebook, snapchat, tumblr, wordpress, blog, vlog, youtube, youtube channel, youtube channel promotion, youtube channel advertisement, grow my youtube, grow my youtube channel, grow my social media, grow my instagram, d474, d474media, d474designs, data the destroyer, d474th3d357r0y3r, datadesigns, datamedia, data, designer, design, designs, sound engineer, sound engineering, audio, audio production, graphic design, graphics, dj, dj data, dj d474, video, photo, photography, video work, videography, choreography, director, directing, acting, actor, writer, ghost writer, musician, artist, production, producer, beats, beat, rap, concert, rave, d474designs.webs.com, https://d474designs.webs.com, d474forex, that hill, d474, d474media, d474designs, data the destroyer, d474th3d357r0y3r, datadesigns, datamedia, data, designer, design, designs, sound engineer, sound engineering, audio, audio production, graphic design, graphics, dj, dj data, dj d474, video, photo, photography, video work, videography, choreography, director, directing, acting, actor, writer, ghost writer, musician, artist, production, producer, beats, beat, rap, concert, rave, d474designs.webs.com, https://d474designs.webs.com, d474forex, that hill">
+  <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+  <style>
+    :root {
+      --bg: #eceefb;
+      --bg2: #dfe3f8;
+      --glass: rgba(255, 255, 255, .7);
+      --line: rgba(60, 70, 160, .18);
+      --ink: #14173a;
+      --muted: #5d6290;
+      --a: #3a4bff;
+      --b: #d1239b;
+      --glow: rgba(58, 75, 255, .35);
+      --ring: rgba(58, 75, 255, .28);
+      --btnink: #fff;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #070816;
+        --bg2: #10123a;
+        --glass: rgba(22, 25, 70, .55);
+        --line: rgba(130, 150, 255, .22);
+        --ink: #e9ecff;
+        --muted: #8f96c9;
+        --a: #5ee7ff;
+        --b: #ff4fd0;
+        --glow: rgba(94, 231, 255, .4);
+        --ring: rgba(94, 231, 255, .28);
+        --btnink: #04121a
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #070816;
+      --bg2: #10123a;
+      --glass: rgba(22, 25, 70, .55);
+      --line: rgba(130, 150, 255, .22);
+      --ink: #e9ecff;
+      --muted: #8f96c9;
+      --a: #5ee7ff;
+      --b: #ff4fd0;
+      --glow: rgba(94, 231, 255, .4);
+      --ring: rgba(94, 231, 255, .28);
+      --btnink: #04121a
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px);
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      min-height: 100%;
+      color: var(--ink);
+      font-family: "Inter", "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(120% 70% at 50% 0%, var(--bg2), var(--bg) 70%);
+      background-color: var(--bg);
+      display: flex;
+      justify-content: center
+    }
+
+    main {
+      width: 100%;
+      max-width: 440px;
+      padding: 26px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -.02em
+    }
+
+    .sub {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5
+    }
+
+    /* radar */
+    .radar {
+      position: relative;
+      width: min(84vw, 340px);
+      aspect-ratio: 1;
+      margin: 0 auto;
+      border-radius: 50%;
+      background: radial-gradient(circle, transparent 58%, var(--glow) 100%);
+      --spin: 3.2s
+    }
+
+    .radar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      box-shadow: 0 0 40px var(--glow), inset 0 0 40px var(--glow);
+      opacity: .55;
+      transition: opacity .5s
+    }
+
+    .radar.idle::before {
+      opacity: .18
+    }
+
+    .rings,
+    .ticks {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%
+    }
+
+    .rings circle {
+      fill: none;
+      stroke: var(--ring);
+      stroke-width: 1
+    }
+
+    .rings line {
+      stroke: var(--ring);
+      stroke-width: 1
+    }
+
+    .ticks {
+      animation: drift 60s linear infinite
+    }
+
+    .ticks line {
+      stroke: var(--a);
+      stroke-width: 1.4;
+      opacity: .7
+    }
+
+    @keyframes drift {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .sweep {
+      position: absolute;
+      inset: 4%;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent 0deg 250deg, color-mix(in srgb, var(--a) 10%, transparent) 310deg, color-mix(in srgb, var(--a) 65%, transparent) 360deg);
+      -webkit-mask: radial-gradient(circle, #000 0 99%, transparent 100%);
+      animation: spin var(--spin) linear infinite;
+      transition: opacity .4s
+    }
+
+    .radar.idle .sweep {
+      opacity: .25;
+      --spin: 9s
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .blip {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      transition: transform .6s cubic-bezier(.2, .8, .2, 1), opacity .4s;
+      opacity: 0
+    }
+
+    .radar.live .blip {
+      opacity: 1
+    }
+
+    .dot {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      margin: -7px 0 0 -7px;
+      border-radius: 50%;
+      background: var(--b);
+      box-shadow: 0 0 14px 3px var(--b)
+    }
+
+    .echo {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      margin: -7px 0 0 -7px;
+      border-radius: 50%;
+      border: 2px solid var(--b);
+      opacity: 0
+    }
+
+    .echo.go {
+      animation: echo 1s ease-out
+    }
+
+    @keyframes echo {
+      from {
+        transform: scale(1);
+        opacity: .9
+      }
+
+      to {
+        transform: scale(6);
+        opacity: 0
+      }
+    }
+
+    .core {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      margin: -5px 0 0 -5px;
+      border-radius: 50%;
+      background: var(--a);
+      box-shadow: 0 0 12px var(--a)
+    }
+
+    .radar.lock .rings circle {
+      stroke: var(--b)
+    }
+
+    .radar.lock::before {
+      box-shadow: 0 0 50px var(--b), inset 0 0 40px var(--b)
+    }
+
+    .radar.lock .sweep {
+      --spin: 1.2s
+    }
+
+    .radar.close .sweep {
+      --spin: 1.8s
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+
+      .sweep,
+      .ticks {
+        animation: none
+      }
+
+      .echo.go {
+        animation: none
+      }
+    }
+
+    /* readout */
+    .panel {
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px 18px 16px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px)
+    }
+
+    .state {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      line-height: 1.1
+    }
+
+    .detail {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    .stats {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px
+    }
+
+    .stat {
+      flex: 1;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 12px
+    }
+
+    .stat b {
+      display: block;
+      font-size: 18px;
+      font-variant-numeric: tabular-nums
+    }
+
+    .stat span {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .meter {
+      margin-top: 14px;
+      height: 6px;
+      border-radius: 6px;
+      background: var(--line);
+      overflow: hidden
+    }
+
+    .meter i {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--a), var(--b));
+      transition: width .5s ease
+    }
+
+    .name {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      min-height: 18px
+    }
+
+    .row {
+      display: flex;
+      gap: 10px
+    }
+
+    button {
+      font: inherit;
+      font-weight: 600;
+      font-size: 15px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      padding: 0 18px;
+      min-height: 50px;
+      cursor: pointer;
+      flex: 1;
+      color: var(--ink);
+      background: var(--glass);
+      transition: transform .12s
+    }
+
+    button:active {
+      transform: scale(.97)
+    }
+
+    button.main {
+      background: linear-gradient(135deg, var(--a), var(--b));
+      border: none;
+      color: var(--btnink);
+      box-shadow: 0 8px 24px -6px var(--glow)
+    }
+
+    button:focus-visible {
+      outline: 3px solid var(--a);
+      outline-offset: 2px
+    }
+
+    button[aria-pressed="false"] {
+      opacity: .7
+    }
+
+    .note {
+      border: 1px solid var(--line);
+      background: var(--glass);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--muted)
+    }
+
+    .note strong {
+      color: var(--ink)
+    }
+
+    .note.warn {
+      border-color: var(--b)
+    }
+
+    .hidden {
+      display: none
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 18px
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header>
+      <h1>Bluetooth Radar</h1>
+      <p class="sub">Pick a nearby device and walk around. The blip moves toward the center as you get closer.</p>
+    </header>
+
+    <div class="radar idle" id="radar" role="img" aria-label="Proximity radar">
+      <svg class="rings" viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="96" />
+        <circle cx="100" cy="100" r="72" />
+        <circle cx="100" cy="100" r="48" />
+        <circle cx="100" cy="100" r="24" />
+        <line x1="100" y1="4" x2="100" y2="196" />
+        <line x1="4" y1="100" x2="196" y2="100" />
+      </svg>
+      <svg class="ticks" id="ticks" viewBox="0 0 200 200" aria-hidden="true"></svg>
+      <div class="sweep"></div>
+      <div class="blip" id="blip">
+        <div class="echo" id="echo"></div>
+        <div class="dot"></div>
+      </div>
+      <div class="core"></div>
+    </div>
+
+    <div class="panel" aria-live="polite">
+      <div class="name" id="name">No device selected</div>
+      <div class="state" id="state">Not tracking</div>
+      <div class="detail" id="detail">Choose a device to begin</div>
+      <div class="stats">
+        <div class="stat"><b id="dist">–</b><span>Distance</span></div>
+        <div class="stat"><b id="dbm">–</b><span>Signal</span></div>
+      </div>
+      <div class="meter"><i id="meter"></i></div>
+    </div>
+
+    <div class="row">
+      <button class="main" id="scan">Choose device</button>
+      <button id="sound" aria-pressed="true">Sound on</button>
+    </div>
+    <div class="row">
+      <button id="stop">Stop</button>
+      <button id="demo">Try demo</button>
+    </div>
+
+    <div class="note warn hidden" id="unsupported">
+      <strong>This browser can’t scan for Bluetooth.</strong> Open this page in Chrome on Android or desktop. iPhone
+      browsers don’t support Web Bluetooth. You can still try the demo.
+    </div>
+    <div class="note hidden" id="needsFlag">
+      <strong>Live signal needs one extra setting.</strong> In Chrome, open chrome://flags, turn on “Experimental Web
+      Platform features,” then reload.
+    </div>
+    <div class="note">
+      <strong>Good to know</strong>
+      <ul>
+        <li>Distance comes from signal strength. The blip’s direction around the radar is not measured.</li>
+        <li>Devices only appear if they’re on and advertising. Earbuds in their case won’t show up.</li>
+        <li>Walls and your body change the signal, so treat distance as a rough guide.</li>
+        <li>Nothing leaves your browser.</li>
+      </ul>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var $ = function (id) { return document.getElementById(id) };
+      var radar = $('radar'), blip = $('blip'), echo = $('echo'), stateEl = $('state'), detailEl = $('detail'), nameEl = $('name'),
+        distEl = $('dist'), dbmEl = $('dbm'), meter = $('meter'), soundBtn = $('sound'), unsup = $('unsupported'), flag = $('needsFlag');
+      var soundOn = true, ctx = null, tracking = false, smooth = null, lastSeen = 0, pingTimer = null, currentDevice = null, advHandler = null, demoTimer = null, flagTimer = null, angle = Math.random() * 6.28;
+
+      // tick marks
+      var tk = $('ticks'), h = '';
+      for (var i = 0; i < 72; i++) {
+        var a = i * 5 * Math.PI / 180, big = i % 6 === 0, r1 = big ? 90 : 93, r2 = 97;
+        h += '<line x1="' + (100 + r1 * Math.sin(a)).toFixed(2) + '" y1="' + (100 - r1 * Math.cos(a)).toFixed(2) + '" x2="' + (100 + r2 * Math.sin(a)).toFixed(2) + '" y2="' + (100 - r2 * Math.cos(a)).toFixed(2) + '" ' + (big ? '' : 'style="opacity:.35"') + '/>';
+      }
+      tk.innerHTML = h;
+
+      var supported = !!(navigator.bluetooth && navigator.bluetooth.requestDevice);
+      if (!supported) unsup.classList.remove('hidden');
+
+      function strength(r) { return Math.max(0, Math.min(1, (r + 95) / 55)); }
+      function label(s) {
+        if (s > .85) return ['Locked on', 'Within arm’s reach'];
+        if (s > .6) return ['Very close', 'Probably in the same room'];
+        if (s > .35) return ['Nearby', 'Keep moving and watch the blip'];
+        if (s > .1) return ['Far', 'Try another room'];
+        return ['Faint', 'Barely picking it up'];
+      }
+      function meters(r) { var d = Math.pow(10, (-59 - r) / 25); return d < 1 ? '<1 m' : (d < 10 ? d.toFixed(0) : Math.round(d / 5) * 5) + ' m'; }
+
+      function place(s) {
+        angle += .12;
+        var R = 150 * (1 - s) * 0.95 + 8;
+        blip.style.transform = 'translate(' + (Math.cos(angle) * R).toFixed(1) + 'px,' + (Math.sin(angle) * R).toFixed(1) + 'px)';
+      }
+      function setSignal(rssi) {
+        smooth = smooth === null ? rssi : smooth * .7 + rssi * .3; lastSeen = Date.now();
+        var s = strength(smooth), t = label(s);
+        // radar px scale: blip offsets are in px relative to 170px radius at 340 size; scale with element
+        var scale = radar.clientWidth / 340;
+        var R = (150 * (1 - s) * 0.95 + 8) * scale; angle += .12;
+        blip.style.transform = 'translate(' + (Math.cos(angle) * R).toFixed(1) + 'px,' + (Math.sin(angle) * R).toFixed(1) + 'px)';
+        radar.classList.remove('idle'); radar.classList.add('live');
+        radar.classList.toggle('lock', s > .85); radar.classList.toggle('close', s > .6 && s <= .85);
+        stateEl.textContent = t[0]; detailEl.textContent = t[1];
+        distEl.textContent = meters(smooth); dbmEl.textContent = Math.round(smooth) + ' dBm';
+        meter.style.width = (s * 100) + '%';
+      }
+      function setIdle(title, detail) {
+        radar.classList.add('idle'); radar.classList.remove('live', 'lock', 'close');
+        stateEl.textContent = title; detailEl.textContent = detail;
+        distEl.textContent = '–'; dbmEl.textContent = '–'; meter.style.width = '0';
+      }
+
+      function ensureAudio() {
+        if (!ctx) { try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { } }
+        if (ctx && ctx.state === 'suspended') ctx.resume();
+      }
+      function beep(f) {
+        if (!ctx) return;
+        var o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.value = f; o.type = 'triangle';
+        g.gain.setValueAtTime(.0001, ctx.currentTime); g.gain.exponentialRampToValueAtTime(.22, ctx.currentTime + .01);
+        g.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime + .16);
+        o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime + .18);
+      }
+      function pingLoop() {
+        if (!tracking) return;
+        var fresh = smooth !== null && Date.now() - lastSeen < 6000, s = fresh ? strength(smooth) : 0;
+        if (fresh) {
+          echo.classList.remove('go'); void echo.offsetWidth; echo.classList.add('go');
+          if (soundOn) beep(480 + s * 720);
+          if (navigator.vibrate && s > .6) try { navigator.vibrate(40); } catch (e) { }
+        } else if (smooth !== null) { setIdle('Signal lost', 'Move closer or wait a moment'); }
+        pingTimer = setTimeout(pingLoop, fresh ? 1400 - s * 1150 : 1500);
+      }
+      function reset() {
+        tracking = false; smooth = null; clearTimeout(pingTimer); clearInterval(demoTimer); clearTimeout(flagTimer);
+        if (currentDevice && advHandler) { try { currentDevice.removeEventListener('advertisementreceived', advHandler); currentDevice.unwatchAdvertisements && currentDevice.unwatchAdvertisements(); } catch (e) { } }
+        currentDevice = null; advHandler = null; flag.classList.add('hidden');
+      }
+      function begin() { tracking = true; smooth = null; lastSeen = 0; ensureAudio(); clearTimeout(pingTimer); pingLoop(); }
+
+      async function choose() {
+        if (!supported) return;
+        ensureAudio();
+        try {
+          var dev = await navigator.bluetooth.requestDevice({ acceptAllDevices: true });
+          reset(); currentDevice = dev; nameEl.textContent = dev.name || 'Unnamed device';
+          if (typeof dev.watchAdvertisements !== 'function') { flag.classList.remove('hidden'); setIdle('No signal data', 'Browser can’t read signal strength'); return; }
+          advHandler = function (ev) { if (typeof ev.rssi === 'number') setSignal(ev.rssi); };
+          dev.addEventListener('advertisementreceived', advHandler);
+          setIdle('Listening…', 'Waiting for the device to advertise');
+          await dev.watchAdvertisements(); begin();
+          flagTimer = setTimeout(function () { if (tracking && smooth === null) setIdle('Nothing heard yet', 'Make sure the device is on and awake'); }, 8000);
+        } catch (e) {
+          if (e && e.name === 'NotFoundError') return;
+          setIdle('Couldn’t start', (e && e.message) ? e.message : 'Something went wrong');
+        }
+      }
+      function startDemo() {
+        reset(); ensureAudio(); nameEl.textContent = 'Demo device (simulated)';
+        var t = 0; begin();
+        demoTimer = setInterval(function () { t += .08; setSignal(-72 + Math.sin(t) * 26 + (Math.random() * 4 - 2)); }, 400);
+      }
+
+      $('scan').onclick = choose; $('demo').onclick = startDemo;
+      $('stop').onclick = function () { reset(); nameEl.textContent = 'No device selected'; setIdle('Not tracking', 'Choose a device to begin'); };
+      soundBtn.onclick = function () { soundOn = !soundOn; soundBtn.setAttribute('aria-pressed', String(soundOn)); soundBtn.textContent = soundOn ? 'Sound on' : 'Sound off'; if (soundOn) ensureAudio(); };
+    })();
+  </script>
+</body>
+
+</html>
